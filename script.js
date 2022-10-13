@@ -2,6 +2,8 @@
 //THE TEST SERVER IS RUNNING ON LOCALHOST:3000//
 ////////////////////////////////////////////////
 
+
+
 // PROBLEM 1
 /*
     In the index.html file in this folder there is a button with an id of 'say-hello-button'!
@@ -10,7 +12,7 @@
 */
 
 // CODE HERE
-
+let sayHelloButton = document.querySelector('#say-hello-button');
 // PROBLEM 2
 /*
     Create a function that changes sayHelloButton's background color to black and its text color to white (you can use the .style object or create a CSS class and use classList.add)
@@ -19,7 +21,10 @@
 */
 
 // CODE HERE
-
+sayHelloButton.addEventListener('mouseover', () => {
+    sayHelloButton.style.backgroundColor = 'black';
+    sayHelloButton.style.color = 'white';
+}) 
 
 // PROBLEM 3
 /*
@@ -31,7 +36,10 @@
 */
 
 // CODE HERE
-
+sayHelloButton.addEventListener('mouseout', () => {
+    sayHelloButton.style.backgroundColor = '#EFEFEF';
+    sayHelloButton.style.color = 'black';
+}) 
 
 // PROBLEM 4
 /*
@@ -52,7 +60,7 @@ const sayHello = () => {
 // DO NOT EDIT FUNCTION
 
 // CODE HERE
-
+sayHelloButton.addEventListener('click', sayHello)
 
 // PROBLEM 5 
 /*
@@ -67,10 +75,13 @@ const sayHello = () => {
 
 const ohMy = () => {
     // YOUR CODE HERE
+    return axios.get('http://localhost:3000/animals')
+    .then(response => {
+        console.log(response.data)
+    })
 }
 
 document.getElementById('animals-button').addEventListener('click', ohMy)
-
 
 // PROBLEM 6 
 /*
@@ -86,8 +97,16 @@ document.getElementById('animals-button').addEventListener('click', ohMy)
 */
 
 const repeatMyParam = () => {
-    //YOUR CODE HERE
+   return axios.get('http://localhost:3000/repeat/' + 'Hello')
+        .then(response => {
+            let repeat = document.getElementById('repeat-text')
+            repeat.textContent = response.data
+            repeat.style.display = 'block'
+        console.log(response.data)
+    })
 }
+
+document.querySelector('#repeat-button').addEventListener('click', repeatMyParam)
 
 // PROBLEM 7
 /*
@@ -112,7 +131,11 @@ const repeatMyParam = () => {
 */
 
 // CODE HERE
-
+const queryName = () => {
+    axios.get('http://localhost:3000/query-test' + '?animals=car')
+    .then((data) => console.log(data))
+}
+document.querySelector('#query-button').addEventListener('click', queryName)
 
 
 ////////////////
