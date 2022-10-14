@@ -77,7 +77,10 @@ const ohMy = () => {
     // YOUR CODE HERE
     return axios.get('http://localhost:3000/animals')
     .then(response => {
-        console.log(response.data)
+        for (let i = 0; i < response.data.length; i++) {
+            let newPara = document.createElement('p').textContent = [i]
+             document.parent.appendChild(newPara)
+        }
     })
 }
 
@@ -188,3 +191,29 @@ document.querySelector('#query-button').addEventListener('click', queryName)
 */
 
 // CODE HERE 
+const form = document.querySelector('form')
+const createFood = (event) => {
+    event.preventDefault()
+    let foodInput = document.querySelector('input')
+    let newFood = foodInput.value
+    let body = {
+        newFood
+    }
+    axios.post('http://localhost:3000/food', body)
+    .then((response) =>{
+        console.log(response.data)
+        let parent = document.querySelector('section')
+
+        response.data.forEach(food => {
+
+        let item = document.createElement('p').textContent = food
+        parent.appendChild(item)
+        })
+
+
+    })
+    .catch((error) =>{
+        console.log(error)
+    })
+}
+form.addEventListener('submit', createFood)
